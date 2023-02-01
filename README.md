@@ -11,8 +11,8 @@ like – a notoriously difficult concept to visualise!
 <br />
 <br />
 
-
-[Project background](https://github.com/wmazin/Visualizing-Quantum-Computing-using-fractals)
+Project background<br />
+[Visualizing Quantum Computing using fractals](https://github.com/wmazin/Visualizing-Quantum-Computing-using-fractals)
 <br />
 <br />
 
