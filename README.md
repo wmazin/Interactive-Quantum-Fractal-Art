@@ -12,7 +12,7 @@ like – a notoriously difficult concept to visualise!
 <br />
 
 
-[project background](https://github.com/wmazin/Visualizing-Quantum-Computing-using-fractals) (author repo)
+[Project background](https://github.com/wmazin/Visualizing-Quantum-Computing-using-fractals)
 <br />
 <br />
 
