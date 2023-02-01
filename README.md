@@ -10,8 +10,11 @@ different fractal images can be seen. This will help the user visualise what a q
 like – a notoriously difficult concept to visualise! 
 <br />
 <br />
-<br />
 
+
+[project background](https://github.com/wmazin/Visualizing-Quantum-Computing-using-fractals) (author repo)
+<br />
+<br />
 
 **License**
 <br />
