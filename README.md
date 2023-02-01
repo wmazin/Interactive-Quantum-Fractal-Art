@@ -4,12 +4,13 @@
 Repo for the RCOS project to create a widget for the Interactive Quantum Art Station.
 
 <br />
+<br />
 The task is to create a simple widget, whereby when a user moves a vector around the Bloch sphere, 
 different fractal images can be seen. This will help the user visualise what a quantum state might look 
 like – a notoriously difficult concept to visualise! 
-
 <br />
-
+<br />
+<br />
 
 
 **License**
