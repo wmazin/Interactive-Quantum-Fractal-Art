@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IQA</title>
+        <meta name="description" content="RPI RCOS Project W/ IBM">
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <header class="main-header">
+            Welcome to the Interactive Quantum Fractal Art website
+        </header>
+        <div class="main-body">
+            <br/>
+            hellow
+            <div class="slidecontainer">
+                <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
+                <p>Value: <span id="quantity"></span></p>
+            </div>
+        </div>
+        
+        <script>
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("quantity");
+            output.innerHTML = slider.value;
+            
+            slider.oninput = function() {
+                output.innerHTML = Math.round((this.value)*(2))/100 + " pi";
+            }
+        </script>
+    </body>
+</html>
