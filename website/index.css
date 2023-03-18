@@ -1,5 +1,5 @@
 body{
-    background-color: aquamarine;
+    background-color: rgb(1, 1, 42);
 }
 
 html, body{
@@ -12,10 +12,15 @@ body{
 }
 
 .main-header{
-    font-size: 3em;
+    font-size: 3.5em;
     font-weight: bold;
-    background-color: grey;
     width: 100vw;
+    height: 1.5em;
+    color: white;
+    text-align: center;
+    vertical-align: center;
+    background-image: url(https://free4kwallpapers.com/uploads/originals/2020/12/14/awesomeblossom-flame-fractal-wallpaper.jpg);
+    background-position: center;
 }
 
 .main-body{
