@@ -4,11 +4,74 @@
         <title>IQA</title>
         <meta name="description" content="RPI RCOS Project W/ IBM">
         <link rel="stylesheet" href="index.css" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+        <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+        <py-env>
+            - numpy
+            - matplotlib
+        </py-env>
     </head>
     <body>
         <header class="main-header">
             Welcome to the Interactive Quantum Fractal Art Website
         </header>
+
+        <div id="matplotlib-lineplot"></div>
+        <py-script output="matplotlib-lineplot">
+            # Python Code
+
+            # importing the matplotlib library
+            import matplotlib.pyplot as plt
+            import numpy as np
+            
+            fig, ax = plt.subplots()
+
+            # predefined values
+            c = 0.4+0.23j # determine this from input
+            size = 1000
+            height = size
+            width = size
+            x = 0
+            y = 0
+            zoom = 1
+            max_iterations = 100
+
+            # To make navigation easier we calculate these values
+            x_width = 1.5
+            y_height = 1.5*height/width
+            x_from = x - x_width/zoom
+            x_to = x + x_width/zoom
+            y_from = y - y_height/zoom
+            y_to = y + y_height/zoom
+            
+            # Here the actual algorithm starts and the z paramter is defined for the Julia set function
+            x = np.linspace(x_from, x_to, width).reshape((1, width))
+            y = np.linspace(y_from, y_to, height).reshape((height, 1))
+            z = x + 1j * y
+            
+            # Initialize c to the complex number obtained from the quantum circuit
+            c = np.full(z.shape, c)
+            
+            # To keep track in which iteration the point diverged
+            div_time = np.zeros(z.shape, dtype=int)
+            
+            # To keep track on which points did not converge so far
+            m = np.full(c.shape, True, dtype=bool)
+            
+            for i in range(max_iterations):
+                z[m] = z[m]**2 + c[m] 
+                m[np.abs(z) > 2] = False
+                div_time[m] = i
+            
+            # actually showing it
+            plt.imshow(div_time, cmap='magma')
+            plt.show()
+            fig
+        </py-script> # toggle
         <div class="main-body">
             <!-- <br/>
             hellow
@@ -16,17 +79,19 @@
                 <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
                 <p>Value: <span id="quantity"></span></p>
             </div> -->
-            <iframe src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 800px;" title="Grok-Bloch">
+            <iframe src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
         </div>
         
         <script>
-            var slider = document.getElementById("myRange");
-            var output = document.getElementById("quantity");
-            output.innerHTML = slider.value;
+            // var slider = document.getElementById("myRange");
+            // var output = document.getElementById("quantity");
+            // output.innerHTML = slider.value;
             
-            slider.oninput = function() {
-                output.innerHTML = Math.round((this.value)*(2))/100 + " pi";
-            }
+            // slider.oninput = function() {
+            //     output.innerHTML = Math.round((this.value)*(2))/100 + " pi";
+            // }
+
+
         </script>
     </body>
 </html>
