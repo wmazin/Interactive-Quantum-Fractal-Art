@@ -34,6 +34,13 @@ body{
     width: 80%; /* Width of the outside container */
 }
 
+#switch {
+    position: absolute;
+    width: 10vw;
+    top: 10vh;
+    left: 0;
+}
+
 /* The slider itself */
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
@@ -69,5 +76,5 @@ body{
     height: 25px; /* Slider handle height */
     background: #04AA6D; /* Green background */
     cursor: pointer; /* Cursor on hover */
-}  
+} 
 /* from w3 schools */
