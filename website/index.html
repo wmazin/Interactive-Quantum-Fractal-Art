@@ -20,8 +20,6 @@
             Welcome to the Interactive Quantum Fractal Art Website
         </header>
 
-        
-        
         <div class="main-body">
             <!-- <br/>
             hellow
@@ -32,7 +30,8 @@
             <div id="matplotlib-lineplot"></div>
             <input type="number" placeholder="0.4" id="input-real">
             <input type="number" placeholder="0.23" id="input-imag">
-            <iframe src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
+            <iframe id="grok-bloch" src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
+            <button id="switch" onclick="toggleInterface()">Switch Interface</button>
         </div>
         
         <script>
@@ -105,19 +104,6 @@
             plt.show()
             fig
         </py-script>
-
-        <div class="main-body">
-            <!-- <br/>
-            hellow
-            <div class="slidecontainer">
-                <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
-                <p>Value: <span id="quantity"></span></p>
-            </div> --->
-
-            <iframe id="grok-bloch" src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 800px; display: none;" title="Grok-Bloch"></iframe>
-
-            <button id="switch" onclick="toggleInterface()">Switch Interface</button>
-        </div>
         
         <script>
             // var slider = document.getElementById("myRange");
