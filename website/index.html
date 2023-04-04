@@ -20,13 +20,41 @@
             Welcome to the Interactive Quantum Fractal Art Website
         </header>
 
-        <div id="matplotlib-lineplot"></div>
+        
+        
+        <div class="main-body">
+            <!-- <br/>
+            hellow
+            <div class="slidecontainer">
+                <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
+                <p>Value: <span id="quantity"></span></p>
+            </div> -->
+            <div id="matplotlib-lineplot"></div>
+            <input type="number" placeholder="0.4" id="input-real">
+            <input type="number" placeholder="0.23" id="input-imag">
+            <iframe src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
+        </div>
+        
+        <script>
+            // var slider = document.getElementById("myRange");
+            // var output = document.getElementById("quantity");
+            // output.innerHTML = slider.value;
+            
+            // slider.oninput = function() {
+            //     output.innerHTML = Math.round((this.value)*(2))/100 + " pi";
+            // }
+
+
+        </script>
         <py-script output="matplotlib-lineplot">
             # Python Code
 
             # importing the matplotlib library
             import matplotlib.pyplot as plt
             import numpy as np
+
+            # import for input
+            # from js import console
             
             fig, ax = plt.subplots()
 
@@ -39,6 +67,11 @@
             y = 0
             zoom = 1
             max_iterations = 100
+
+            # input numbers
+            #a = Element('input-real').element.value
+            #b = Element('input-imag').element.value
+            #c = a+bj
 
             # To make navigation easier we calculate these values
             x_width = 1.5
@@ -71,27 +104,6 @@
             plt.imshow(div_time, cmap='magma')
             plt.show()
             fig
-        </py-script> # toggle
-        <div class="main-body">
-            <!-- <br/>
-            hellow
-            <div class="slidecontainer">
-                <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
-                <p>Value: <span id="quantity"></span></p>
-            </div> -->
-            <iframe src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
-        </div>
-        
-        <script>
-            // var slider = document.getElementById("myRange");
-            // var output = document.getElementById("quantity");
-            // output.innerHTML = slider.value;
-            
-            // slider.oninput = function() {
-            //     output.innerHTML = Math.round((this.value)*(2))/100 + " pi";
-            // }
-
-
-        </script>
+        </py-script>
     </body>
 </html>
