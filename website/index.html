@@ -71,15 +71,19 @@
             plt.imshow(div_time, cmap='magma')
             plt.show()
             fig
-        </py-script> # toggle
+        </py-script>
+
         <div class="main-body">
             <!-- <br/>
             hellow
             <div class="slidecontainer">
                 <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
                 <p>Value: <span id="quantity"></span></p>
-            </div> -->
-            <iframe src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
+            </div> --->
+
+            <iframe id="grok-bloch" src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 800px; display: none;" title="Grok-Bloch"></iframe>
+
+            <button id="switch" onclick="toggleInterface()">Switch Interface</button>
         </div>
         
         <script>
@@ -91,7 +95,19 @@
             //     output.innerHTML = Math.round((this.value)*(2))/100 + " pi";
             // }
 
+            // Switch interfaces:
+            var interface1 = document.getElementById("matplotlib-lineplot");
+            var interface2 = document.getElementById("grok-bloch");
 
+            function toggleInterface() {
+                if (interface1.style.display === "none") {
+                    interface1.style.display = "block";
+                    interface2.style.display = "none";
+                } else {
+                    interface1.style.display = "none";
+                    interface2.style.display = "block";
+                }
+            }
         </script>
     </body>
 </html>

@@ -11,6 +11,11 @@ body{
     width: 100vw;
 }
 
+#matplotlib-lineplot{
+    margin:auto;
+    width: 50%;
+}
+
 .main-header{
     font-size: 3.5em;
     font-weight: bold;
@@ -25,7 +30,6 @@ body{
 
 .main-body{
     width: 80vw;
-    background-color: white;
     margin: auto;
 }
 
@@ -35,6 +39,7 @@ body{
 }
 
 #switch {
+    background-color: white;
     position: absolute;
     width: 10vw;
     top: 10vh;
