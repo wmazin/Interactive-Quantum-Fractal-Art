@@ -20,7 +20,7 @@ body{
     font-size: 3.5em;
     font-weight: bold;
     width: 100vw;
-    height: 1.5em;
+    height: 12vh;
     color: white;
     text-align: center;
     vertical-align: center;
@@ -40,10 +40,10 @@ body{
 
 #switch {
     background-color: white;
-    position: absolute;
-    width: 10vw;
-    top: 10vh;
-    left: 0;
+}
+
+#reEvalButton{
+    background-color: white;
 }
 
 /* The slider itself */
@@ -83,3 +83,17 @@ body{
     cursor: pointer; /* Cursor on hover */
 }  
 /* from w3 schools */
+
+#grok-bloch{
+    display: none;
+}
+
+.input-holder{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 10vw;
+    top: 12vh;
+    left: 0;
+    gap: 1vh;
+}

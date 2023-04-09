@@ -28,10 +28,15 @@
                 <p>Value: <span id="quantity"></span></p>
             </div> -->
             <div id="matplotlib-lineplot"></div>
-            <input type="number" placeholder="0.4" id="input-real">
-            <input type="number" placeholder="0.23" id="input-imag">
             <iframe id="grok-bloch" src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
-            <button id="switch" onclick="toggleInterface()">Switch Interface</button>
+            <div class="input-holder">
+                <button id="switch" onclick="toggleInterface()">Switch Interface</button>
+                <label for="input-real" style="color: white">Real:</label>
+                <input type="number" placeholder="0.4" id="input-real">
+                <label for="input-imag" style="color: white">Imaginary:</label>
+                <input type="number" placeholder="0.23" id="input-imag">
+                <button id="reEvalButton">Reevaluate fractal</button>
+            </div>
         </div>
         
         <script>
@@ -53,13 +58,17 @@
             import numpy as np
 
             # import for input
-            # from js import console
+            from js import console
+            from js import document 
+            from pyodide import create_proxy
+
             
+
             fig, ax = plt.subplots()
 
             # predefined values
             c = 0.4+0.23j # determine this from input
-            size = 1000
+            size = 200
             height = size
             width = size
             x = 0
@@ -67,10 +76,7 @@
             zoom = 1
             max_iterations = 100
 
-            # input numbers
-            #a = Element('input-real').element.value
-            #b = Element('input-imag').element.value
-            #c = a+bj
+            # beginning of julia set
 
             # To make navigation easier we calculate these values
             x_width = 1.5
@@ -103,6 +109,32 @@
             plt.imshow(div_time, cmap='magma')
             plt.show()
             fig
+
+            def juliaSet():
+                console.log("a")
+                #a = Element.('input-real').element.value
+                #b = Element.('input-imag').element.value
+                c = 1+2j
+
+                # Initialize c to the complex number obtained from the quantum circuit
+                c = np.full(z.shape, c)
+                
+                # To keep track on which points did not converge so far
+                m = np.full(c.shape, True, dtype=bool)
+                
+                for i in range(max_iterations):
+                    z[m] = z[m]**2 + c[m] 
+                    m[np.abs(z) > 2] = False
+                    div_time[m] = i
+                
+                # actually showing it
+                plt.imshow(div_time, cmap='magma')
+                plt.show()
+                fig
+
+            function_proxy = create_proxy(juliaSet)
+
+            document.getElementById("reEvalButton").addEventListener("click", function_proxy)
         </py-script>
         
         <script>
@@ -117,6 +149,8 @@
             // Switch interfaces:
             var interface1 = document.getElementById("matplotlib-lineplot");
             var interface2 = document.getElementById("grok-bloch");
+
+         
 
             function toggleInterface() {
                 if (interface1.style.display === "none") {
