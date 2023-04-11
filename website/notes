@@ -1,0 +1,4 @@
+-Query Parameters
+-app.get("text"): text specifies where the imformation comes from.
+-from fastapi.responses import HTMLResponse
+-TemplateResponse renders image.

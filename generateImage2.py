@@ -16,7 +16,7 @@ def julia_set_jit(c:complex=z, height:numba.int8=heightsize, width:numba.int8=wi
     # Here the actual algorithm starts and the z paramter is defined for the Julia set function
     x = np.linspace(x_from, x_to, width).reshape((1, width))
     y = np.linspace(y_from, y_to, height).reshape((height, 1))
-    z = x + 1j y
+    z = x + 1j * y
 
     # Initialize c to the complex number obtained from the quantum circuit
     c = np.full(z.shape, c)

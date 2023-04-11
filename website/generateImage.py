@@ -2,12 +2,14 @@
 
 # importing the matplotlib library
 import matplotlib.pyplot as plt
+import io
+import json
 import numpy as np
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 
 app = FastAPI()
 
-@app.post("/generate-image")
+@app.get("/website/index.html")
 async def gen():
     # import for input
     # from js import console
@@ -16,7 +18,7 @@ async def gen():
 
     # predefined values
     c = 0.4+0.23j # determine this from input
-    size = 1000
+    size = 200
     height = size
     width = size
     x = 0
@@ -57,6 +59,16 @@ async def gen():
         div_time[m] = i
 
     # actually showing it
-    plt.imshow(div_time, cmap='magma')
-    plt.show()
-    fig
+    buf = io.BytesIO()
+
+    fig.savefig(buf, format='png')
+    
+    buf.seek(0)
+    # Read the image data from the buffer as a byte string
+    img_bytes = buf.getvalue()
+
+    # Encode the byte string as a base64 string for JSON serialization
+    img_b64 = img_bytes.encode('base64').decode('utf-8')
+
+    # Create a JSON object containing the base64-encoded image and return it
+    return {"image": img_b64}

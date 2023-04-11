@@ -27,9 +27,11 @@
                 <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
                 <p>Value: <span id="quantity"></span></p>
             </div> -->
-            <div id="matplotlib-lineplot"></div>
-            <input type="number" placeholder="0.4" id="input-real">
-            <input type="number" placeholder="0.23" id="input-imag">
+            <section id="hi">
+                <div id="matplotlib-lineplot"></div>
+            </section>
+            <input type="number" value="0.4" id="input-real">
+            <input type="number" value="0.23" id="input-imag">
             <iframe id="grok-bloch" src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
             <button id="switch" onclick="toggleInterface()">Switch Interface</button>
         </div>
@@ -45,7 +47,7 @@
 
 
         </script>
-        <py-script output="matplotlib-lineplot">
+        <py-script output="matplotlib-lineplot" >
             # Python Code
 
             # importing the matplotlib library
@@ -54,12 +56,17 @@
 
             # import for input
             # from js import console
+            from js import setDisplay
+            from js import getReal, getFake
             
             fig, ax = plt.subplots()
 
             # predefined values
-            c = 0.4+0.23j # determine this from input
-            size = 1000
+            r = float(getReal())
+            f = float(getFake())
+
+            c = complex(r, f) # determine this from input
+            size = 400
             height = size
             width = size
             x = 0
@@ -103,28 +110,48 @@
             plt.imshow(div_time, cmap='magma')
             plt.show()
             fig
+            #setDisplay()
         </py-script>
         
         <script>
-            // var slider = document.getElementById("myRange");
-            // var output = document.getElementById("quantity");
-            // output.innerHTML = slider.value;
-            
-            // slider.oninput = function() {
-            //     output.innerHTML = Math.round((this.value)*(2))/100 + " pi";
-            // }
-
             // Switch interfaces:
             var interface1 = document.getElementById("matplotlib-lineplot");
             var interface2 = document.getElementById("grok-bloch");
 
+            function getReal() {
+                var a = document.getElementById("input-real").value;
+                return a;
+            }
+            function getFake() {
+                var a = document.getElementById("input-imag").value;
+                return a;
+            }
+
+            function setDisplay() {
+                //console.log("running");
+                interface3.style.display = "none";
+                interface2.style.display = "block";
+            }
+
+            async function generateImage() {
+                const text = document.getElementById("text").value;
+                const response = await fetch("/generate-image", {
+                    method: "POST",
+                    body: new FormData(document.querySelector("form"))
+                });
+                const json = await response.json();
+                const img = document.createElement("img");
+                img.src = "data:image/png;base64," + json.data;
+                document.getElementById("image-container").appendChild(img);
+            }
+
             function toggleInterface() {
-                if (interface1.style.display === "none") {
-                    interface1.style.display = "block";
-                    interface2.style.display = "none";
-                } else {
-                    interface1.style.display = "none";
+                if (interface2.style.display === "none") {
                     interface2.style.display = "block";
+                    interface1.style.display = "none";
+                } else {
+                    interface2.style.display = "none";
+                    interface1.style.display = "block";
                 }
             }
         </script>
