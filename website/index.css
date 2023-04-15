@@ -38,7 +38,7 @@ body{
     width: 80%; /* Width of the outside container */
 }
 
-#switch {
+.but {
     background-color: white;
 }
 
@@ -96,4 +96,20 @@ body{
     top: 12vh;
     left: 0;
     gap: 1vh;
+}
+
+.left-window{
+    position: absolute;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 20vh;
+    top: 15vh;
+}
+
+.left-calculations{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }

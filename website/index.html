@@ -22,18 +22,22 @@
 
         <div class="main-body">
             <!-- <br/>
-            hellow
+            hello world
             <div class="slidecontainer">
                 <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
                 <p>Value: <span id="quantity"></span></p>
             </div> -->
-            <section id="hi">
-                <div id="matplotlib-lineplot"></div>
-            </section>
-            <input type="number" value="0.4" id="input-real">
-            <input type="number" value="0.23" id="input-imag">
+            <div id="matplotlib-lineplot"></div>
             <iframe id="grok-bloch" src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
-            <button id="switch" onclick="toggleInterface()">Switch Interface</button>
+            <div class="left-window">
+                <button class="but" id="switch" onclick="toggleInterface()">Switch Interface</button>
+                <div class="left-calculations">
+                    <input type="number" value="0.4" id="input-real">
+                    <input type="number" value="0.23" id="input-imag">
+                </div>
+                <button class="but" id="calc-button" type="submit" pys-onClick="printPyscript">Calculate Frcatal</button>
+                <div class="but" id="test-output"></div>
+            </div>
         </div>
         
         <script>
@@ -55,17 +59,17 @@
             import numpy as np
 
             # import for input
-            # from js import console
+            from js import console
             from js import setDisplay
-            from js import getReal, getFake
+            from js import getReal, getImag
             
             fig, ax = plt.subplots()
 
             # predefined values
             r = float(getReal())
-            f = float(getFake())
+            f = float(getImag())
 
-            c = complex(r, f) # determine this from input
+            c = complex(r,f) # determine this from input
             size = 400
             height = size
             width = size
@@ -108,9 +112,17 @@
             
             # actually showing it
             plt.imshow(div_time, cmap='magma')
+            # plt.savefig("website/test.png")
             plt.show()
             fig
             #setDisplay()
+            console.log(f'sad')
+
+            def printPyscript():
+                a = float(getReal)
+                b = float(getImag)
+                c = complex(a, b)
+                console.log(f'text: {c}')
         </py-script>
         
         <script>
@@ -122,7 +134,7 @@
                 var a = document.getElementById("input-real").value;
                 return a;
             }
-            function getFake() {
+            function getImag() {
                 var a = document.getElementById("input-imag").value;
                 return a;
             }
