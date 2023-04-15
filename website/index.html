@@ -116,13 +116,32 @@
             plt.show()
             fig
             #setDisplay()
-            console.log(f'sad')
 
             def printPyscript(*args, **kwargs):
                 a = Element('input-real').element.value
                 b = Element('input-imag').element.value
                 c = complex(float(a), float(b))
-                console.log(f'text: {c}')
+                console.log(f'complex number: {c}')
+                
+                # Initialize c to the complex number obtained from the quantum circuit
+                c = np.full(z.shape, c)
+                
+                # To keep track in which iteration the point diverged
+                div_time = np.zeros(z.shape, dtype=int)
+                
+                # To keep track on which points did not converge so far
+                m = np.full(c.shape, True, dtype=bool)
+                
+                for i in range(max_iterations):
+                    z[m] = z[m]**2 + c[m] 
+                    m[np.abs(z) > 2] = False
+                    div_time[m] = i
+                
+                # actually showing it
+                plt.imshow(div_time, cmap='magma')
+                # plt.savefig("website/test.png")
+                plt.show()
+                fig
         </py-script>
         
         <script>
