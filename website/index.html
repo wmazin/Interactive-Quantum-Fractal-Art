@@ -118,10 +118,10 @@
             #setDisplay()
             console.log(f'sad')
 
-            def printPyscript():
-                a = float(getReal)
-                b = float(getImag)
-                c = complex(a, b)
+            def printPyscript(*args, **kwargs):
+                a = Element('input-real').element.value
+                b = Element('input-imag').element.value
+                c = complex(float(a), float(b))
                 console.log(f'text: {c}')
         </py-script>
         
