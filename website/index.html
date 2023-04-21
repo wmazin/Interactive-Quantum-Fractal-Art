@@ -27,7 +27,9 @@
                 <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
                 <p>Value: <span id="quantity"></span></p>
             </div> -->
-            <div id="matplotlib-lineplot"></div>
+            <div id="matplotlib-box">
+                <div id="matplotlib-lineplot"></div>
+            </div>
             <iframe id="grok-bloch" src="https://javafxpert.github.io/grok-bloch/" style="width:80vw; height: 80vh;" title="Grok-Bloch"></iframe>
             <div class="left-window">
                 <button class="but" id="switch" onclick="toggleInterface()">Switch Interface</button>
@@ -62,6 +64,68 @@
             from js import console
             from js import setDisplay
             from js import getReal, getImag
+
+            def printPyscript(*args, **kwargs):
+                fig, ax = plt.subplots()
+                
+                a = Element('input-real').element.value
+                b = Element('input-imag').element.value
+                c = complex(float(a), float(b))
+                console.log(f'complex number: {c}')
+
+                size = 400
+                height = size
+                width = size
+                x = 0
+                y = 0
+                zoom = 1
+                max_iterations = 100
+
+                # To make navigation easier we calculate these values
+                x_width = 1.5
+                y_height = 1.5*height/width
+                x_from = x - x_width/zoom
+                x_to = x + x_width/zoom
+                y_from = y - y_height/zoom
+                y_to = y + y_height/zoom
+                
+                # Here the actual algorithm starts and the z paramter is defined for the Julia set function
+                x = np.linspace(x_from, x_to, width).reshape((1, width))
+                y = np.linspace(y_from, y_to, height).reshape((height, 1))
+                z = x + 1j * y
+                
+                # Initialize c to the complex number obtained from the quantum circuit
+                c = np.full(z.shape, c)
+                
+                # To keep track in which iteration the point diverged
+                div_time = np.zeros(z.shape, dtype=int)
+                
+                # To keep track on which points did not converge so far
+                m = np.full(c.shape, True, dtype=bool)
+                
+                for i in range(max_iterations):
+                    z[m] = z[m]**2 + c[m] 
+                    m[np.abs(z) > 2] = False
+                    div_time[m] = i
+                
+                
+                # Initialize c to the complex number obtained from the quantum circuit
+                c = np.full(z.shape, c)
+                
+                # To keep track in which iteration the point diverged
+                div_time = np.zeros(z.shape, dtype=int)
+                
+                # To keep track on which points did not converge so far
+                m = np.full(c.shape, True, dtype=bool)
+                
+                for i in range(max_iterations):
+                    z[m] = z[m]**2 + c[m] 
+                    m[np.abs(z) > 2] = False
+                    div_time[m] = i
+                
+                # actually showing it
+                plt.imshow(div_time, cmap='magma')
+                fig
             
             fig, ax = plt.subplots()
 
@@ -77,11 +141,6 @@
             y = 0
             zoom = 1
             max_iterations = 100
-
-            # input numbers
-            #a = Element('input-real').element.value
-            #b = Element('input-imag').element.value
-            #c = a+bj
 
             # To make navigation easier we calculate these values
             x_width = 1.5
@@ -113,40 +172,15 @@
             # actually showing it
             plt.imshow(div_time, cmap='magma')
             # plt.savefig("website/test.png")
-            plt.show()
             fig
             #setDisplay()
 
-            def printPyscript(*args, **kwargs):
-                a = Element('input-real').element.value
-                b = Element('input-imag').element.value
-                c = complex(float(a), float(b))
-                console.log(f'complex number: {c}')
-                
-                # Initialize c to the complex number obtained from the quantum circuit
-                c = np.full(z.shape, c)
-                
-                # To keep track in which iteration the point diverged
-                div_time = np.zeros(z.shape, dtype=int)
-                
-                # To keep track on which points did not converge so far
-                m = np.full(c.shape, True, dtype=bool)
-                
-                for i in range(max_iterations):
-                    z[m] = z[m]**2 + c[m] 
-                    m[np.abs(z) > 2] = False
-                    div_time[m] = i
-                
-                # actually showing it
-                plt.imshow(div_time, cmap='magma')
-                # plt.savefig("website/test.png")
-                plt.show()
-                fig
+            
         </py-script>
         
         <script>
             // Switch interfaces:
-            var interface1 = document.getElementById("matplotlib-lineplot");
+            var interface1 = document.getElementById("matplotlib-box");
             var interface2 = document.getElementById("grok-bloch");
 
             function getReal() {
